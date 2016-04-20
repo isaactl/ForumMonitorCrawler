@@ -43,7 +43,7 @@
             function (index, item) {
                 if (index == 0)// topic
                 {
-                    topicDate = $($(item).find('.local-date')[0]).text().trim();
+                    topicDate = $($(item).find('.local-date')[0]).text().trim() + $($(item).find('.local-firendly-date')[0]).text().trim();
                 }
                 else {
                     //replies
