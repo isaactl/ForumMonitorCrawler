@@ -43,7 +43,7 @@
             function (index, item) {
                 if (index == 0)// topic
                 {
-                    topicDate = $($(item).find('.local-date')[0]).text().trim() + $($(item).find('.local-firendly-date')[0]).text().trim();
+                    topicDate = $($(item).find('.local-date')[0]).text().trim() + $($(item).find('.local-friendly-date')[0]).text().trim();
                 }
                 else {
                     //replies
@@ -102,7 +102,9 @@
         auth: {
             user: mailboxFrom,
             pass: password
-        }
+        },
+        proxy: 'http://web-proxy.sgp.hpecorp.net:8080'
+
     });
 
     (function () {
@@ -119,7 +121,7 @@
                     console.error('[ERROR]Collection' + err);
                     return;
                 }
-                dataParseForumListPage(this.host, body);
+                dataParseForumListPage(this.uri.host, body);
             });
         }
     })();
