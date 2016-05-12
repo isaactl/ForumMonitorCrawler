@@ -1,4 +1,14 @@
+var nodemailer = require('nodemailer'),  // for mail operation
+    http = require('http'),
+    cheerio = require('cheerio'),   // parse HTML
+    request = require('request'),   // fetch HTML
+    readlineSync = require('readline-sync');    // get input parameter
 
+var myAgent = new http.Agent(
+    {
+        maxSockets: 6
+       
+    });
 (function() {
 
 
@@ -19,7 +29,8 @@
 
                     request({
                         url: postURL,
-                        method: 'GET'
+                        method: 'GET',
+                        agent: myAgent
                     }, function (err, res, body) {
                         if (err) {
                             console.log(postURL)
@@ -76,10 +87,6 @@
         });
     }
 
-    var nodemailer = require('nodemailer'),  // for mail operation
-        cheerio = require('cheerio'),   // parse HTML
-        request = require('request'),   // fetch HTML
-        readlineSync = require('readline-sync');    // get input parameter
 
 // Wait for user's response.
     var mailboxFrom = readlineSync.question('MailBox Sent From (Gmail only):');
@@ -114,7 +121,8 @@
         for (var i = 1; i <= MAXIMUM_PAGES; ++i) {
             request({
                 url: forumURL + "/page/" + i,
-                method: 'GET'
+                method: 'GET',
+                agent: myAgent
             }, function (err, res, body) {
                 if (err) {
                     console.log(forumURL);
